@@ -13,6 +13,7 @@ function userReducer(state = userInitState, action){
     const {type, payload} = action;
     switch(type){
         case TYPES.SET_USER:
+            if(payload._id === null) localStorage.removeItem('token');
             return {...state, ...payload};
         case TYPES.INIT_USER_CART:
             return {...state, cart:payload};

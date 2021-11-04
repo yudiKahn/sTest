@@ -158,13 +158,10 @@ export const getUserFromToken = () => async dispatch => {
         dispatch(setLoading(false));
     }   
 }
-export const logout = () => {
-    localStorage.removeItem('token');
-    return {
-        type:TYPES.SET_USER,
-        payload:{_id:null}
-    }
-};
+export const logout = () => ({
+    type:TYPES.SET_USER,
+    payload:{_id:null}
+});
 
 export const initOrders = (userId, toFetch = true) => async dispatch => {
     dispatch(setLoading(true));

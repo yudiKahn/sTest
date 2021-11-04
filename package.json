@@ -5,7 +5,7 @@
   "main": "main.js",
   "scripts": {
     "client": "cd client & npm run dev",
-    "dev": "nodemon main.js --ignore client"
+    "dev": "nodemon main.js"
   },
   "author": "",
   "license": "ISC",
