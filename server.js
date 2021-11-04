@@ -14,7 +14,7 @@ app.use((req,res,next)=>{
 });
 
 app.use(express.json({strict: false}));
-app.use(express.static('./server/public'));
+app.use(express.static('server/public'));
 app.use((req,res,next)=>{
     try{
         next();
