@@ -7,7 +7,7 @@
     "dev": "nodemon server.js",
     "start": "node server.js  -p $PORT",
     "client": "npm start --prefix client",
-    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false"
   },
   "author": "",
   "license": "ISC",
