@@ -1,0 +1,4 @@
+npm run build --prefix client
+git add .
+git commit -m "hey github"
+git push -u origin main
