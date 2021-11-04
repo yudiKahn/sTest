@@ -125,9 +125,6 @@ function Navbar({user, logout}) {
                 <Link to="/shop/all" className="relative font-medium leading-6 text-gray-600 transition duration-150 ease-out hover:text-gray-900">
                   <span className="block">Shop</span>
                 </Link>
-                <Link to="/todos" className="relative font-medium leading-6 text-gray-600 transition duration-150 ease-out hover:text-gray-900">
-                  <span className="block">Todos</span>
-                </Link>
                 {
                   user._id && <Link to="/user" className="relative font-medium leading-6 text-gray-600 transition duration-150 ease-out hover:text-gray-900">
                     <span className="block">{user.firstName}'s Place</span>

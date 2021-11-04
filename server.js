@@ -6,12 +6,12 @@ const connectDb = require('./server/service/connectDb');
 require('dotenv').config();
 
 //force https
-// app.use((req,res,next)=>{
-//     if(!req.secure && req.get('x-forwarded-proto') !== 'https' && process.env.NODE_ENV === 'production'){
-//         return res.redirect('https://' + req.get('host') + req.url);
-//     }
-//     return next();
-// });
+app.use((req,res,next)=>{
+    if(!req.secure && req.get('x-forwarded-proto') !== 'https' && process.env.NODE_ENV === 'production'){
+        return res.redirect('https://' + req.get('host') + req.url);
+    }
+    return next();
+});
 
 app.use(express.json({strict: false}));
 app.use(express.static('server/public'));
