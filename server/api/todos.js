@@ -4,7 +4,7 @@ const path = require('path');
 const tryCatchWrapper = require('../service/tryCatchWrapper');
 const uuid = require('uuid');
 
-const filePath = path.join(__dirname.split('\\').slice(0,-1).join('\\'), 'data', 'todos.json');
+const filePath = path.join(__dirname, '..', 'data', 'todos.json');
 
 // @route /api/todos/
 router

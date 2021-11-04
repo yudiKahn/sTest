@@ -4,7 +4,7 @@ const path = require('path');
 const tryCatchWrapper = require('../service/tryCatchWrapper');
 const uuid = require('uuid');
 
-const filePath = path.join(__dirname.split('\\').slice(0,-1).join('\\'), 'data', 'itemsCategories.json');
+const filePath = path.join(__dirname, '..', 'data', 'itemsCategories.json');
 
 // @route /api/categories/
 router
