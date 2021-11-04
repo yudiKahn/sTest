@@ -122,7 +122,7 @@ function Navbar({user, logout}) {
                 <Link to="/gallery" className="relative font-medium leading-6 text-gray-600 transition duration-150 ease-out hover:text-gray-900">
                   <span className="block">Gallery</span>
                 </Link>
-                <Link to="/shop" className="relative font-medium leading-6 text-gray-600 transition duration-150 ease-out hover:text-gray-900">
+                <Link to="/shop/all" className="relative font-medium leading-6 text-gray-600 transition duration-150 ease-out hover:text-gray-900">
                   <span className="block">Shop</span>
                 </Link>
                 <Link to="/todos" className="relative font-medium leading-6 text-gray-600 transition duration-150 ease-out hover:text-gray-900">
