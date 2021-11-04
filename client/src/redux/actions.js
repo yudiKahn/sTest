@@ -159,7 +159,7 @@ export const getUserFromToken = () => async dispatch => {
     }   
 }
 export const logout = () => {
-    localStorage.removeItem('cart');
+    localStorage.removeItem('token');
     return {
         type:TYPES.SET_USER,
         payload:{_id:null}
