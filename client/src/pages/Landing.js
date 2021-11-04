@@ -12,12 +12,12 @@ function Landing({categories, initCategories}) {
     },[]);
 
     return (<>
-        <section className="px-2 py-32 bg-white md:px-0">
+        <section className="px-2 py-32 bg-white dark:bg-gray-800 md:px-0">
             <div className="container items-center max-w-6xl px-8 mx-auto xl:px-5">
                 <div className="flex flex-wrap items-center sm:-mx-3">
                     <div className="w-full md:w-1/2 md:px-3">
                         <div className="w-full pb-6 space-y-6 sm:max-w-md lg:max-w-lg md:space-y-4 lg:space-y-8 xl:space-y-9 sm:pr-5 lg:pr-0 md:pb-0">
-                            <h1 className="text-4xl font-extrabold tracking-tight text-gray-900 sm:text-5xl md:text-4xl lg:text-5xl xl:text-6xl">
+                            <h1 className="text-4xl font-extrabold tracking-tight text-gray-900 dark:text-gray-200 sm:text-5xl md:text-4xl lg:text-5xl xl:text-6xl">
                                 <span className="block xl:inline">All Your Sukkot Needs&nbsp;</span>
                                 <span className="block text-green-600 xl:inline">In One Place!</span>
                             </h1>
@@ -43,10 +43,10 @@ function Landing({categories, initCategories}) {
             </div>
         </section>
 
-        <section className="py-20 bg-white" id="shopping">
+        <section className="py-20 bg-white dark:bg-gray-800" id="shopping">
             <div className="container max-w-6xl mx-auto">
-                <h2 className="text-4xl font-bold tracking-tight text-center">Shop</h2>
-                <p className="mt-2 text-lg text-center text-gray-600">Check out our list of categories below.</p>
+                <h2 className="text-4xl font-bold tracking-tight text-center dark:text-gray-200">Shop</h2>
+                <p className="mt-2 text-lg text-center text-gray-600 dark:text-gray-300">Check out our list of categories below.</p>
                 <div className="grid grid-cols-4 gap-8 mt-10 sm:grid-cols-8 lg:grid-cols-12 sm:px-8 xl:px-0">
                     {
                         categories.map((v,i)=> <Card 
@@ -61,11 +61,11 @@ function Landing({categories, initCategories}) {
             </div>
         </section>
 
-        <section className="flex items-center justify-center py-20 bg-white min-w-screen">
-            <div className="px-16 bg-white">
+        <section className="flex items-center justify-center py-20 bg-white dark:bg-gray-800 min-w-screen">
+            <div className="px-16">
                 <div className="container flex flex-col items-start mx-auto lg:items-center">
 
-                    <h2 className="relative flex items-start justify-start w-full max-w-3xl text-5xl font-bold lg:justify-center">                  
+                    <h2 className="dark:text-gray-300 relative flex items-start justify-start w-full max-w-3xl text-5xl font-bold lg:justify-center">                  
                         Quotes
                     </h2>
                     <div className="block w-full h-0.5 max-w-lg mt-6 bg-green-100 rounded-full"></div>
@@ -73,7 +73,7 @@ function Landing({categories, initCategories}) {
                     <div className="items-center justify-center w-full mt-12 mb-4 lg:flex">
                         <div className="w-full mt-12 mb-4 lg:flex">
                             <div className="flex flex-col items-start justify-start w-full h-auto lg:w-2/3">
-                                <blockquote className="text-lg text-gray-500">
+                                <blockquote className="text-lg text-gray-500 dark:text-gray-200">
                                     "Rabbi Schneur Zalman of Liadi taught that when G‑d told Moses that
                                     the Jews should take an etrog, He sent messengers to gather them in Calabria. 
                                     Thus, even as Napoleon wreaked havoc on Europe during his wars of conquest,
@@ -84,7 +84,7 @@ function Landing({categories, initCategories}) {
 
                         <div className="w-full mt-12 mb-4 lg:flex">
                             <div className="flex flex-col items-start justify-start w-full h-auto lg:w-2/3">
-                                <blockquote className="text-lg text-gray-500">
+                                <blockquote className="text-lg text-gray-500 dark:text-gray-200">
                                     "When World War I broke out, a Chassid named Avraham Erlanger, living in Switzerland,
                                     received a telegram from the fifth Rebbe asking that he arrange a Calabria etrog.
                                     Against huge odds, Erlanger managed to obtain a number of Calabria etrogim,

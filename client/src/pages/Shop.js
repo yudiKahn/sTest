@@ -13,7 +13,7 @@ function Shop({items, initItems}) {
         ref.current();
     },[]);
 
-    return (<div className="antialiased bg-gray-200 text-gray-900 font-sans p-6">
+    return (<div className="antialiased bg-gray-200 dark:bg-gray-800 text-gray-900 font-sans p-6">
         <div className="container mx-auto">
             <div className="flex flex-wrap -mx-4">
             {

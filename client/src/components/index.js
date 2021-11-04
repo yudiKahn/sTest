@@ -6,8 +6,9 @@ import Spinner from "./Spinner";
 import Card from "./Card";
 import Confirm from "./Confirm";
 import Popup from "./Popup";
+import ToggleTheme from "./ToggleTheme";
 
 export {
     UserRoute, Navbar, CornerCircle, Footer,
-    Spinner, Card, Confirm, Popup
+    Spinner, Card, Confirm, Popup, ToggleTheme
 }

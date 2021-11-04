@@ -3,8 +3,8 @@ import React from 'react'
 function Gallery() {
     const imgsCount = 10;
 
-    return(<div className="container mx-auto px-4 bg-white">            
-    <section className="py-8 px-4">
+    return(<div className="mx-auto px-4 bg-white dark:bg-gray-800">            
+    <section className="py-8 px-4 container">
     <div className="flex flex-wrap -mx-4">
     {
       iterate(imgsCount, i=>

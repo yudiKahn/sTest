@@ -11,9 +11,9 @@ function Card({icon, title, txt, onClick, link}) {
     <p className="text-base text-center text-gray-500">{txt}.</p>
     </>);
 
-    return link ? <Link to={link} className="relative flex flex-col items-center justify-between col-span-4 px-8 py-12 space-y-4 overflow-hidden bg-gray-100 sm:rounded-xl">
+    return link ? <Link to={link} className="relative flex flex-col items-center justify-between col-span-4 px-8 py-12 space-y-4 overflow-hidden bg-gray-100 dark:bg-gray-800 shadow-2xl  sm:rounded-xl">
         {content}
-    </Link> : <div onClick={onClick} className="cursor-pointer relative flex flex-col items-center justify-between col-span-4 px-8 py-12 space-y-4 overflow-hidden bg-gray-100 sm:rounded-xl">
+    </Link> : <div onClick={onClick} className="cursor-pointer relative flex flex-col items-center justify-between col-span-4 px-8 py-12 space-y-4 overflow-hidden bg-gray-100 dark:bg-gray-800 shadow-2xl  sm:rounded-xl">
         {content}
     </div>;
 }
