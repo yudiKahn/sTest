@@ -4,8 +4,9 @@
   "description": "",
   "main": "main.js",
   "scripts": {
-    "client": "cd client & npm run dev",
-    "dev": "nodemon main.js"
+    "client": "cd client & npm run start",
+    "dev": "nodemon main.js",
+    "start":"node main.js"
   },
   "author": "",
   "license": "ISC",
