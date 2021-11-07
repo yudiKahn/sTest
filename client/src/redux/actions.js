@@ -192,7 +192,6 @@ export const initCart =  () => async dispatch => {
             })
         }
     } catch (err) {
-
     } finally {
         dispatch(setLoading(false));
     } 

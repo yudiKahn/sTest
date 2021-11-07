@@ -20,7 +20,7 @@ function ShopItem({items, addToCart}) {
         });
     }
 
-    return (<section className="w-full px-2 py-20 bg-gray-100 xl:px-8">
+    return (<section className="w-full px-2 py-20 bg-gray-100 xl:px-8 flex-grow">
         <div className="max-w-5xl mx-auto py-16">
             <div className="grid" style={{placeItems:'center'}}>
                 

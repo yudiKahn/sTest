@@ -6,12 +6,12 @@ import {getOrderTotal} from '../utils';
 
 function UserCart({user, initCart, removeFromCart}) {
     const ref = useRef(()=>{});
-    ref.current = () =>initCart();
+    ref.current = () => initCart();
     useEffect(() => {
         ref.current();
     }, [])
 
-    return (<div className="w-full bg-white grid place-content-center my-3">
+    return (<div className="w-full bg-white grid place-content-center py-3 flex-grow dark:bg-gray-800">
     <div className="container">
         <div className="rounded-lg shadow-lg overflow-hidden ">
             <div className="px-6 py-8 bg-white sm:p-10 sm:pb-6">

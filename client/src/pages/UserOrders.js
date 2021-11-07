@@ -13,9 +13,9 @@ function UserOrders({ user, initOrders }) {
         ref.current();
     }, []);
 
-    return (<div className="w-full bg-white grid place-content-center my-3">
+    return (<div className="w-full bg-white dark:bg-gray-800 grid place-content-center py-5 flex-grow">
         <div className="container">
-            <div className="rounded-lg shadow-lg overflow-hidden ">
+            <div className="rounded-lg shadow-lg overflow-hidden">
                 <div className="px-6 py-8 bg-white sm:p-10 sm:pb-6">
                     <h3 className="text-2xl leading-8 font-extrabold text-gray-900 sm:text-3xl sm:leading-9">
                     {
