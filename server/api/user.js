@@ -6,11 +6,17 @@ const {authAdmin} = require('../service/middlewares');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
-
+//@desc  register a user
 //@route /api/user
-router.post('/', (req,res)=>{
-    
-});
+router.post('/', tryCatchWrapper(async (req,res)=>{
+    const {address, firstName, lastName, email, password, phoneNumber} = req.body.user;
+    if(!firstName || !lastName || !email || !phoneNumber || !password || !address) throw new Error("Please fill all required fields");
+    const user = new User(req.body.user);
+    user.save();
+    const token = jwt.sign({id:user._id}, process.env.JWT_SECRET, {expiresIn:'10 days'});
+    user.token = token;
+    res.json(user);
+}));
 
 //@route /api/user/:id
 router
@@ -22,8 +28,10 @@ router
     .put(tryCatchWrapper((req,res)=>{
 
     }))
-    .delete(tryCatchWrapper((req,res)=>{
-
+    .delete(tryCatchWrapper(async (req,res)=>{
+        const {id} = req.params;
+        await User.deleteOne({_id:id});
+        res.json(id);
     }));
 
 //@route /api/user/login

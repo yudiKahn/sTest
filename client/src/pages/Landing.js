@@ -51,7 +51,7 @@ function Landing({categories, initCategories}) {
                     {
                         categories.map((v,i)=> <Card 
                             key={i}
-                            icon={<i className="fas fa-question-circle fa-2x"></i>}
+                            icon={<i className="far fa-lemon fa-2x"></i>}
                             title={v}
                             txt={`See all products under '${v}' category`}
                             link={`/shop/${v}`}

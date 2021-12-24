@@ -18,6 +18,7 @@ function ShopItem({items, addToCart}) {
             category:  item.category,
             q:         parseInt(fd.get('q'))
         });
+        
     }
 
     return (<section className="w-full px-2 py-20 bg-gray-100 xl:px-8 flex-grow">

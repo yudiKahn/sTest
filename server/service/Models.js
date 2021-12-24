@@ -13,7 +13,13 @@ const userSchema = new mongoose.Schema({
     firstName: {type: String, required: true},
     lastName: {type: String, required: true},
     isAdmin: {type:Boolean, required:false},
-});
+}, {
+    writeConcern: {
+       w: 'majority',
+       j: true,
+       wtimeout: 1000
+    }
+ });
 
 const OrderSchema = new mongoose.Schema({
     userId: {type: mongoose.Schema.Types.ObjectId, required: true, ref: 'user'},
@@ -28,7 +34,14 @@ const OrderSchema = new mongoose.Schema({
     comment: {type: String},
     isDone: {type: Boolean, default: false},
     isPaid: {type: Boolean, default: false}
-}, { timestamps: true });
+}, {
+    timestamps: true,
+    writeConcern: {
+        w: 'majority',
+        j: true,
+        wtimeout: 1000
+    } 
+});
 
 const itemSchema = new mongoose.Schema({
     category:{type:String, required:true},

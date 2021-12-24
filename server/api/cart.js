@@ -26,17 +26,29 @@ router
         res.json(cart);
     }));
 
-
+//@desc update item qty in cart
 //@route /api/cart/:cid/:iid
-router.delete('/:cid/:itemId', tryCatchWrapper(async (req,res)=>{
-    let {cid,itemId} = req.params;
-    let cart = await Cart.findOne({_id:cid});
-    let newItems = Array.from(cart.items);
-    newItems = newItems.filter(v=>v._id != itemId)
-    cart.items = newItems;
-    await cart.save();
-    res.json(cart);
-}))
+router.route('/:cid/:itemId')
+    .delete(tryCatchWrapper(async (req,res)=>{
+        let {cid,itemId} = req.params;
+        let cart = await Cart.findOne({_id:cid});
+        let newItems = Array.from(cart.items).filter(v => v._id.toString() !== itemId);
+        cart.items = newItems;
+        await cart.save();
+        res.json(cart);
+    }))
+    .put(tryCatchWrapper(async (req,res)=>{
+        let {cid,itemId} = req.params;
+        let {dir} = req.body;
+        let cart = await Cart.findOne({_id:cid});
+        let newItems = Array.from(cart.items).map(v=>{
+            if(v._id.toString() === itemId) v.q = (dir === "up" ? v.q+1 : dir === "down" ? v.q-1 : v.q);
+            return v;
+        }).filter(v => v.q > 0);
+        cart.items = newItems;
+        await cart.save();
+        res.json(cart);
+    }));
 
 //@route /api/cart/:id
 router.get('/:uid', tryCatchWrapper(async (req,res)=>{

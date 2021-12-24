@@ -2,9 +2,11 @@
 
 function getOrderTotal(order){
     let res = 0;
-    Array.from(order.items).forEach(item=>{
-        res += (parseFloat(item.price).toFixed(2) * parseInt(item.q));
-    })
+    if(order?.items){
+        Array.from(order.items).forEach(item=>{
+            res += (parseFloat(item.price).toFixed(2) * parseInt(item.q));
+        })
+    }
     return res.toFixed(2);
 }
 

@@ -1,12 +1,18 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { connect } from 'react-redux'
-import {initAdminUsers} from '../redux/actions';
+import {initAdminUsers, deleteUser} from '../redux/actions';
 import {Link} from 'react-router-dom';
 
-function AdminUsers({users, initAdminUsers}) {
+function AdminUsers({users, initAdminUsers, deleteUser}) {
   const ref = useRef(()=>{});
   ref.current = () => (users && users.length < 1) && initAdminUsers();
 
+  const onDeleteUser = (user) => {
+    const toDelete = window.confirm(`Are you sure you want to delete ${user.firstName} ${user.lastName}`);
+    if(toDelete){
+      deleteUser(user._id);
+    }
+  }
   useEffect(()=>{
       ref.current();
   },[]);
@@ -37,14 +43,17 @@ function AdminUsers({users, initAdminUsers}) {
                 <th className="px-6 bg-blueGray-50 dark:text-gray-200 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
                     Name
                 </th>
-              <th className="px-6 bg-blueGray-50 dark:text-gray-200 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
-                Email
-            </th>
-               <th className="px-6 bg-blueGray-50 dark:text-gray-200 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
-                Phone
-            </th>
-              <th className="px-6 bg-blueGray-50 dark:text-gray-200 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
-                    Orders  
+                <th className="px-6 bg-blueGray-50 dark:text-gray-200 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                  Email
+                </th>
+                <th className="px-6 bg-blueGray-50 dark:text-gray-200 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                  Phone
+                </th>
+                <th className="px-6 bg-blueGray-50 dark:text-gray-200 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                  Orders  
+                </th>
+                <th className="px-6 bg-blueGray-50 text-red-400 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                  Delete
                 </th>
               </tr>
             </thead>
@@ -53,18 +62,21 @@ function AdminUsers({users, initAdminUsers}) {
             {
                 users.map((v,i)=> ((v.firstName+" "+v.lastName).toLowerCase().includes(nameFilter)) && (<tr key={i}>
                     <th className="dark:text-gray-200 border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left text-blueGray-700">
-                      {v.firstName} {v.lastName}
+                      {v.isAdmin || v.admin ? <b className="text-blue-400">A</b>:""} {v.firstName} {v.lastName}
                     </th>
                     <td className="dark:text-gray-300 border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
                         <a href={`mailto:${v.email}`}><i className="fas fa-link"></i> {v.email}</a>
                     </td>
-                    <td className="border-t-0 px-6 border-l-0 border-r-0 text-xs whitespace-nowrap p-4">   
+                    <td className="dark:text-gray-300 border-t-0 px-6 border-l-0 border-r-0 text-xs whitespace-nowrap p-4">   
                       <a href={`tel:${v.phoneNumber}`}><i className="fas fa-phone"></i> {v.phoneNumber}</a>                   
                     </td>
-                    <td className="border-t-0 px-6 border-l-0 border-r-0 text-xs whitespace-nowrap p-4 align-middle">
+                    <td className="dark:text-gray-300 border-t-0 px-6 border-l-0 border-r-0 text-xs whitespace-nowrap p-4 align-middle">
                       <Link to="/">
                         <i className="fas fa-external-link-square-alt"></i>
                       </Link>
+                    </td>
+                    <td className="dark:text-gray-300 border-t-0 px-6 border-l-0 border-r-0 text-xs whitespace-nowrap p-4 align-middle">
+                        <i className="fas fa-trash text-red-400 cursor-pointer" onClick={()=>onDeleteUser(v)}></i>                      
                     </td>
                   </tr>))
             }
@@ -77,4 +89,4 @@ function AdminUsers({users, initAdminUsers}) {
     </section>)
 }
 
-export default connect(s=>({users:s.admin.users}), {initAdminUsers})(AdminUsers)
+export default connect(s=>({users:s.admin.users}), {initAdminUsers, deleteUser})(AdminUsers)

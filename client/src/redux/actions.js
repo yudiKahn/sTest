@@ -1,7 +1,5 @@
 import axios from 'axios';
 import store from './store';
-import React from 'react';
-import {Confirm} from '../components';
 import * as TYPES from './types';
 
 //#region app
@@ -125,6 +123,30 @@ export const putTodo = (id, val) => async (dispatch) => {
 //#endregion
 
 //#region user
+export const register = (userObj) => async dispatch => {
+    dispatch(setLoading(true));
+    try {
+        const {street, city, state, zip, firstName, lastName, email, phoneNumber, password} = userObj;
+        if(!street || !city || !state || !zip || !firstName || !lastName || !email || !phoneNumber || !password)
+            throw new Error("Please fill all required fields");
+        const user = {
+            address: {
+                street, city, state, zip
+            },
+            firstName, lastName, email, password, phoneNumber
+        };
+        let resp = await axios.post('/api/user', {user});
+        localStorage.setItem('token', resp.data.token);
+        dispatch({
+            type:TYPES.SET_USER,
+            payload:resp.data
+        });
+    } catch (error) {
+    } finally {
+        dispatch(setLoading(false));
+    }
+}
+
 export const login = (email, password) => async dispatch => {
     dispatch(setLoading(true));
     try {
@@ -139,6 +161,17 @@ export const login = (email, password) => async dispatch => {
         dispatch(setLoading(false));
     } 
 }
+export const deleteUser = id => async dispatch => {
+    dispatch(setLoading(true));
+    try {
+        await axios.delete(`/api/user/${id}`);
+        await dispatch(initAdminUsers());
+    } catch (error) {
+    } finally {
+        dispatch(setLoading(false));
+    }
+}
+
 export const getUserFromToken = () => async dispatch => {
     dispatch({
         type:TYPES.SET_LOADING,
@@ -163,33 +196,78 @@ export const logout = () => ({
     payload:{_id:null}
 });
 
-export const initOrders = (userId, toFetch = true) => async dispatch => {
+//#endregion
+
+//#region user order
+export const deleteOrder = (orderId, isDone = false) => async dispatch => {
     dispatch(setLoading(true));
     try {
-        if(toFetch){
-            let resp = await axios.get(`/api/orders/${userId}`);
+        if(isDone) throw new Error("Cannot delete order once done. contact yanky to change status of order")
+        let toDelete = window.confirm("Are you sure you want to delete that order ?");
+        if(toDelete){
+            await axios.delete(`/api/orders/order/${orderId}`);
+            await dispatch(initOrders(store.getState().user._id));
+        }
+    } catch (error) {
+    } finally {
+        dispatch(setLoading(false));
+    }
+}
+
+export const initOrders = (userId) => async dispatch => {
+    dispatch(setLoading(true));
+    try {
+        let resp = axios.get(`/api/orders/${userId}`);
+        resp.then(d=>{
             dispatch({
                 type:TYPES.SET_USER_ORDERS,
-                payload:resp.data
+                payload:d.data
             });
-        }
+        });
     } catch (err) {
-        
+        console.log(err);
     } finally {
         dispatch(setLoading(false));
     } 
 }
+export const createOrder = (cart) => async dispatch => {
+    dispatch(setLoading(true));
+    try {
+        let comment = prompt("Do you want to add a comment for this order ?", "");
+        cart.comment = comment;
+        let resp = await axios.post(`/api/orders`, {cart});
+        dispatch({
+            type:TYPES.INIT_USER_CART,
+            payload:{}
+        });
+        dispatch({
+            type:TYPES.SET_USER_ORDERS,
+            payload:[
+                ...store.getState().user.orders,
+                resp.data
+            ]
+        })
+    } catch (error) {
+    } finally {
+        dispatch(setLoading(false));
+    }
+}
+//#endregion
+
+//#region user cart
 export const initCart =  () => async dispatch => {
     dispatch(setLoading(true));
     try {
         let {cart, _id} = store.getState().user;
         if(cart.items.length < 1){
             if(!_id) throw new Error("No user id");
-            let resp = await axios.get(`/api/cart/${_id}`);
-            dispatch({
-                type:TYPES.INIT_USER_CART,
-                payload:resp.data.cart
-            })
+            let resp = axios.get(`/api/cart/${_id}`);
+            resp.then(d=>{
+                dispatch({
+                    type:TYPES.INIT_USER_CART,
+                    payload:d.data.cart
+                })
+            });
         }
     } catch (err) {
     } finally {
@@ -199,29 +277,14 @@ export const initCart =  () => async dispatch => {
 export const removeFromCart = (cid, itemId) => async dispatch => {
     dispatch(setLoading(true));
     try {
-        dispatch({
-            type:TYPES.SET_POPUP,
-            payload: () => <Confirm txt="Are you sure ?" onClick={async (didSubmit)=>{
-                dispatch(setLoading(true));
-                try{
-                    dispatch({
-                        type:TYPES.SET_POPUP,
-                        payload:null
-                    });
-                    if(didSubmit){
-                        let resp = await axios.delete(`/api/cart/${cid}/${itemId}`);
-                        dispatch({
-                            type:TYPES.INIT_USER_CART,
-                            payload:resp.data
-                        });
-                    }
-                }catch(er){
-
-                }finally{
-                    dispatch(setLoading(false));
-                }
-            }}/>
-        })
+        let toDelete = window.confirm("Are you sure you ?")
+        if(toDelete){
+            let resp = await axios.delete(`/api/cart/${cid}/${itemId}`);
+            dispatch({
+                type:TYPES.INIT_USER_CART,
+                payload:resp.data
+            });
+        }
     } catch (error) {
         
     } finally {
@@ -244,8 +307,21 @@ export const addToCart = (item) => async dispatch => {
         dispatch(setLoading(false));
     } 
 }
-//#endregion
+export const changeQtyOfItemInCart = (cid, iid, dir) => async dispatch => {
+    dispatch(setLoading(true));
+    try{
+        let resp = await axios.put(`/api/cart/${cid}/${iid}`, {dir});
+        dispatch({
+            type:TYPES.INIT_USER_CART,
+            payload: resp.data
+        });
+    }catch(err){
+    } finally {
+        dispatch(setLoading(false));
+    }
+}
 
+//#endregion
 
 //#region admin
 export const initAdminUsers = () => async dispatch => {
@@ -277,15 +353,4 @@ export const initAdminOrders = () => async dispatch => {
         dispatch(setLoading(false));
     }   
 }
-//#endregion
-
-//#region  template
-// dispatch(setLoading(true));
-// try {
-//     
-// } catch (err) {
-    
-// } finally {
-//     dispatch(setLoading(false));
-// } 
 //#endregion

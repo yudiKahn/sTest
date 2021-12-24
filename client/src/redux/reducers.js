@@ -35,7 +35,7 @@ const appInitState = {
     isLoading:false, 
     items:[],
     categories:[],
-    popup: null,
+    popup: null
 }
 
 function appReducer(state = appInitState, {type, payload}){

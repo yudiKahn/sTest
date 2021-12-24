@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
 
 function ToggleTheme() {
+
     const [htmlEl, setHtmlEl] = useState(null);
-    const [isDark, setIsDark] = useState(null);
+    const [isDark, setIsDark] = useState(false);
     const toggle = () => {
       htmlEl?.classList?.toggle('dark');
       setIsDark(!isDark);
@@ -10,7 +11,6 @@ function ToggleTheme() {
 
     useEffect(()=>{
       setHtmlEl(document.querySelector('html'));
-      setIsDark(document.querySelector('html').classList.contains('dark'));
     },[]);
 
     return (htmlEl && isDark !== null) && (<div 
@@ -21,4 +21,4 @@ function ToggleTheme() {
     </div>)
 }
 
-export default ToggleTheme
+export default ToggleTheme;

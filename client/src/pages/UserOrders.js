@@ -4,12 +4,12 @@ import { initOrders } from '../redux/actions';
 import {Link} from 'react-router-dom';
 import {formatDate, getOrderTotal} from '../utils';
 
-function UserOrders({ user, initOrders }) {
+const UserOrders = ({ user, initOrders }) => {
     const ref = useRef(()=>{});
-    ref.current = () => initOrders(user._id, (user.orders && user.orders.length < 1));
+    ref.current = () => initOrders(user._id);
 
 
-    useEffect(() => {
+    useEffect(()=>{
         ref.current();
     }, []);
 
@@ -34,7 +34,7 @@ function UserOrders({ user, initOrders }) {
                             user.orders.map((v,i)=><li key={i}>
                                 <Link to={`/user/orders/${v._id}`} className="flex items-start cursor-pointer">
                                     <div className="flex-shrink-0">
-                                        <i className={v.isDone && v.isPaid ? 'text-green-600 fas fa-check':'text-red-600 fas fa-times'}></i>
+                                        <i className="fas fa-mouse-pointer"></i>
                                     </div>
                                     <div className="ml-3 text-base leading-6 flex flex-col md:flex-row flex-wrap flex-grow justify-between items-baseline">
                                         <p className="text-gray-700 flex-shrink-0">

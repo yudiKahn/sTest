@@ -1,10 +1,10 @@
 import React, {useEffect, useRef} from 'react'
 import { connect } from 'react-redux'
-import { initCart, removeFromCart } from '../redux/actions'
+import { initCart, removeFromCart, changeQtyOfItemInCart, createOrder } from '../redux/actions'
 import {Link} from 'react-router-dom';
 import {getOrderTotal} from '../utils';
 
-function UserCart({user, initCart, removeFromCart}) {
+function UserCart({user, initCart, removeFromCart, changeQtyOfItemInCart, createOrder}) {
     const ref = useRef(()=>{});
     ref.current = () => initCart();
     useEffect(() => {
@@ -49,13 +49,13 @@ function UserCart({user, initCart, removeFromCart}) {
                                         <i onClick={()=>removeFromCart(user.cart._id, v._id)} className="fas fa-times text-white"></i>                                        
                                     </span>
                                     <span className="rounded-full bg-indigo-400 px-2 py-1 text-xs font-bold mr-3 cursor-pointer">
-                                        <i onClick={()=>null} className="fas fa-sort-up text-white align-middle"></i>                                        
+                                        <i onClick={()=>changeQtyOfItemInCart(user.cart._id, v._id,"up")} className="fas fa-sort-up text-white align-middle"></i>                                        
                                     </span>
                                     <span>
                                         {v.q}
                                     </span>
                                     <span className="rounded-full bg-indigo-400 px-2 py-1 text-xs font-bold mx-3 cursor-pointer">
-                                        <i onClick={()=>null} className="fas fa-sort-down text-white align-text-top"></i>                                        
+                                        <i onClick={()=>changeQtyOfItemInCart(user.cart._id, v._id,"down")} className="fas fa-sort-down text-white align-text-top"></i>                                        
                                     </span>
                                 </div>
                             </div>
@@ -73,7 +73,10 @@ function UserCart({user, initCart, removeFromCart}) {
                 </div>
             </div>
             <div className="px-6 pt-6 pb-8 bg-gray-100 sm:p-10 sm:pt-6">
-                <Link to="/shop/all" className="cursor-pointer mt-6 rounded-md flex items-center justify-center px-5 py-3 border border-solid border-gray-400 text-lg leading-6 font-medium rounded-md text-gray-700">
+                <button onClick={()=>createOrder(user.cart)} className="w-full rounded-md flex items-center justify-center px-5 py-3 border border-solid border-green-700 text-lg leading-6 font-medium rounded-md text-green-700">
+                    Make an order
+                </button>
+                <Link to="/shop/all" className="mt-6 rounded-md flex items-center justify-center px-5 py-3 border border-solid border-gray-400 text-lg leading-6 font-medium rounded-md text-gray-700">
                     Go Shopping
                 </Link>
             </div>
@@ -82,4 +85,4 @@ function UserCart({user, initCart, removeFromCart}) {
 </div>)
 }
 
-export default connect(s=>({user:s.user}), {initCart, removeFromCart})(UserCart);
+export default connect(s=>({user:s.user}), {initCart, removeFromCart, changeQtyOfItemInCart, createOrder})(UserCart);
