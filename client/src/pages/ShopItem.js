@@ -1,7 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
-import {Link, useParams} from 'react-router-dom';
+import {Link, useHistory, useParams} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {addToCart, initItems} from '../redux/actions';
+import Four0Four from './404';
 
 function ShopItem({items, addToCart, initItems}) {
     const [item,setItem] = useState(null);
@@ -19,6 +20,7 @@ function ShopItem({items, addToCart, initItems}) {
         init.current();
     },[items]);
     
+    const history = useHistory();
     const onSubmit = e => {
         e.preventDefault();
         let fd = new FormData(e.target);
@@ -30,10 +32,10 @@ function ShopItem({items, addToCart, initItems}) {
             category:  item.category,
             q:         parseInt(fd.get('q'))
         });
-        
+        history.push("/user/cart")
     }
 
-    return item && (<section className="w-full px-2 py-20 bg-gray-100 xl:px-8 flex-grow dark:bg-gray-700">
+    return item ? (<section className="w-full px-2 py-20 bg-gray-100 xl:px-8 flex-grow dark:bg-gray-700">
         <div className="max-w-5xl mx-auto py-16">
             <div className="grid" style={{placeItems:'center'}}>
                 
@@ -78,7 +80,7 @@ function ShopItem({items, addToCart, initItems}) {
 
             </div>
         </div>
-    </section>)
+    </section>) : <Four0Four/>
 }
 
 export default connect(s=>({items:s.app.items}), {addToCart, initItems})(ShopItem)

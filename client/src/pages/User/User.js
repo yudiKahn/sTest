@@ -8,7 +8,7 @@ function User({user, logout}) {
     return user._id && (<section className="py-20 bg-white dark:bg-gray-800">
         <div className="container max-w-6xl mx-auto">
             <h2 className="text-4xl font-bold tracking-tight text-center dark:text-gray-200">{getGreeting()} {user.firstName}</h2>
-            <p className="mt-2 text-lg text-center text-gray-600 dark:text-gray-300">Check out our list of awesome features below.</p>
+            <p className="mt-2 text-lg text-center text-gray-600 dark:text-gray-300">Check out your list of actions below.</p>
             <div className="grid grid-cols-4 gap-8 mt-10 sm:grid-cols-8 lg:grid-cols-12 sm:px-8 xl:px-0">
                 <Card
                     icon={<i style={{display:'grid',fontSize:20}} className="fas fa-chart-bar w-8 h-8 place-content-center"></i>}

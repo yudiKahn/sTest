@@ -1,10 +1,15 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {connect} from 'react-redux';
-import {Link} from 'react-router-dom';
+import {Link, useLocation} from 'react-router-dom';
 import {logout} from '../redux/actions';
 
 function Navbar({user, logout}) {
   const [open, setOpen] = useState(false);
+  const location = useLocation();
+  
+  useEffect(()=>{
+    setOpen(false);
+  }, [location]);
 
   return (
     <>

@@ -42,8 +42,8 @@ function getCartSalesMsg(items){
             <div className="flex">
                 <div className="self-center">
                     <p className="text-sm">
-                        For evrey set over $50 you get Egyptian Lulav, Arava and an Hadas C.
-                        And for evrey Yanever set you get also Hadas B.
+                        For every set over $50 you get Egyptian Lulav, Arava and an Hadas C.
+                        And for every Yanever set you get also Hadas B.
                     </p>
                 </div>
             </div>

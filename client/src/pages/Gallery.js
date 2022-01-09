@@ -5,7 +5,7 @@ function Gallery() {
 
     return(<div className="bg-white dark:bg-gray-800">
     <div className="mx-auto">            
-      <section className="py-8 px-4 container">
+      <section className="py-8 px-4 container mx-auto">
       <div className="flex flex-wrap -mx-4">
       {
         iterate(imgsCount, i=>

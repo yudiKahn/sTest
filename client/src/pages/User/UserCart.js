@@ -27,17 +27,17 @@ function UserCart({user, initCart, removeFromCart, changeQtyOfItemInCart, create
                     <div className="flex-1 border-t-2 border-gray-200" style={{borderTopStyle:'solid'}}></div>
                 </div>
 
-                {getCartSalesMsg(user?.cart?.items)}
+                {user?.cart?.items && getCartSalesMsg(user.cart.items)}
 
                 <div className="mt-8">
                     <ul className="pl-0">
                     {
-                        user.cart?.items?.map((v,i)=><li key={i}>
+                        user.cart?.items ? user.cart.items.map((v,i)=><li key={i}>
                             <div className="flex items-start">
                                 <div className="text-base leading-6 flex flex-col md:flex-row flex-wrap flex-grow justify-between items-baseline">
-                                    <p className="text-gray-700 flex-shrink-0">
-                                        {v.name} <small>{v.priceType||null} {v.option||null}</small>
-                                    </p>
+                                    <Link to={`/shop/item/${v._id}`} className="text-gray-700 flex-shrink-0">
+                                        {v.name} <small>{v.priceType.toString()!=="undefined"&&v.priceType} {v.option}</small>
+                                    </Link>
                                     <div className="flex-shrink-0 mt-1 md:mt-0">
                                         <small className="ml-5 mr-3">{v.q} &times; {v.price.toFixed(2)} = </small>
                                         <span className="text-lg text-gray-800 font-bold">
@@ -62,7 +62,7 @@ function UserCart({user, initCart, removeFromCart, changeQtyOfItemInCart, create
                                     </span>
                                 </div>
                             </div>
-                        </li>)
+                        </li>) : null
                     }
                     {
                         user.cart && user.cart.items && <li className="mt-10">
