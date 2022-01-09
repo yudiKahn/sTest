@@ -26,7 +26,7 @@ router
         res.json(cart);
     }));
 
-//@desc update item qty in cart
+//@desc change item in cart
 //@route /api/cart/:cid/:iid
 router.route('/:cid/:itemId')
     .delete(tryCatchWrapper(async (req,res)=>{

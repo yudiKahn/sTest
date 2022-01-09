@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react'
 import { connect } from 'react-redux'
-import {initAdminOrders} from '../redux/actions';
-import {getOrderTotal} from '../utils';
+import {initAdminOrders} from '../../redux/actions';
+import {getOrderTotal} from '../../utils';
 
 function AdminOrders({orders, initAdminOrders}) {
     const ref = useRef(()=>{});

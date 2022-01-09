@@ -35,7 +35,8 @@ const appInitState = {
     isLoading:false, 
     items:[],
     categories:[],
-    popup: null
+    popup: null,
+    alerts:[]
 }
 
 function appReducer(state = appInitState, {type, payload}){
@@ -48,6 +49,8 @@ function appReducer(state = appInitState, {type, payload}){
             return {...state, items:payload};
         case TYPES.SET_LOADING:
             return {...state, isLoading:payload};
+        case TYPES.SET_ALERTS:
+            return {...state, alerts: payload};
         default: return state;
     }
 }

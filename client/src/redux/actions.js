@@ -61,6 +61,11 @@ export const setPopup = (element) => ({
     type: TYPES.SET_POPUP,
     payload: element
 });
+
+export const setAlerts = (newAlert) => ({
+    type: TYPES.SET_ALERTS,
+    payload: newAlert === null ? [] : [...store.getState().app.alerts, newAlert]
+});
 //#endregion
 
 //#region todos
@@ -233,6 +238,7 @@ export const initOrders = (userId) => async dispatch => {
 export const createOrder = (cart) => async dispatch => {
     dispatch(setLoading(true));
     try {
+        if(cart.items.length < 1) throw new Error("Please add items to shopping cart")
         let comment = prompt("Do you want to add a comment for this order ?", "");
         cart.comment = comment;
         let resp = await axios.post(`/api/orders`, {cart});
@@ -295,14 +301,14 @@ export const addToCart = (item) => async dispatch => {
     dispatch(setLoading(true));
     try {
         let uid = store.getState().user._id;
-        if(!uid || !item) throw new Error('Error. no paramaters')
+        if(!uid || !item) throw new Error('Error. no paramaters');
         let resp = await axios.post('/api/cart', {uid, item});
         dispatch({
             type:TYPES.INIT_USER_CART,
             payload:resp.data
         });
     } catch (err) {
-        
+        dispatch(setAlerts({bold:err.message,sm:"",type:"error"}))
     } finally {
         dispatch(setLoading(false));
     } 

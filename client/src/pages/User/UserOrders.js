@@ -1,8 +1,8 @@
 import React, { useEffect, useRef } from 'react'
 import { connect } from 'react-redux';
-import { initOrders } from '../redux/actions';
+import { initOrders } from '../../redux/actions';
 import {Link} from 'react-router-dom';
-import {formatDate, getOrderTotal} from '../utils';
+import {formatDate, getOrderTotal} from '../../utils';
 
 const UserOrders = ({ user, initOrders }) => {
     const ref = useRef(()=>{});

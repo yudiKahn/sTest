@@ -2,6 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
+
+
 body, html{
   scroll-behavior: smooth;
 }
@@ -14,6 +16,15 @@ body, html{
   left: 0;
   background-color: rgb(225, 225, 225,.5);
   z-index: 101;
+}
+.alerts{
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top:0;
+  left: 0;
+  background-color: rgb(225, 225, 225,.5);
+  z-index: 100;
 }
 .popup{
   width: 100vw;

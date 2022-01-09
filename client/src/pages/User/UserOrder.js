@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
 import {Link, useParams} from 'react-router-dom';
 import {connect} from 'react-redux';
-import { getOrderTotal } from '../utils';
-import {initOrders, deleteOrder} from '../redux/actions';
+import { getOrderTotal } from '../../utils';
+import {initOrders, deleteOrder} from '../../redux/actions';
 
 function UserOrder({userId, orders, initOrders, deleteOrder}) {
     const {uid} = useParams();

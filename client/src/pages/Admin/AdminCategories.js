@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { connect } from 'react-redux';
-import {initCategories, addCategory} from '../redux/actions'
+import {initCategories, addCategory} from '../../redux/actions'
 
 function AdminCategories({categories, initCategories, addCategory}) {
     const ref= useRef(()=>{});

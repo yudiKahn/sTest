@@ -36,10 +36,25 @@ const Shop = {
 }
 
 
+function getCartSalesMsg(items){
+    if(Array.from(items).findIndex(v => v.category.toLowerCase() === "sets") > -1){
+        return (<div className="bg-indigo-200 rounded my-2 px-4 py-3 shadow-md w-full">
+            <div className="flex">
+                <div className="self-center">
+                    <p className="text-sm">
+                        For evrey set over $50 you get Egyptian Lulav, Arava and an Hadas C.
+                        And for evrey Yanever set you get also Hadas B.
+                    </p>
+                </div>
+            </div>
+        </div>)
+    }
+}
 
 export {
     getOrderTotal,
     formatDate,
     getGreeting,
     Shop,
+    getCartSalesMsg
 }

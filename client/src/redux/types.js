@@ -8,3 +8,4 @@ export const SET_USER_ORDERS = "setuserorders";
 export const INIT_USER_CART = "initusercart";
 export const INIT_ADMIN_USERS = "initadminusers";
 export const INIT_ADMIN_ORDERS = "initadminorders";
+export const SET_ALERTS = "setalerts";

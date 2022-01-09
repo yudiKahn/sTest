@@ -2,7 +2,7 @@ import axios from 'axios';
 import React, { useEffect, useRef, useState } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom';
-import { initCategories, initItems } from '../redux/actions';
+import { initCategories, initItems } from '../../redux/actions';
 
 function AdminItems({categories, items, initCategories, initItems}) {
     const [isPrices, setIsPrices] = useState(false);

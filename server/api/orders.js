@@ -2,6 +2,7 @@ const router = require('express').Router();
 const tryCatchWrapper = require('../service/tryCatchWrapper');
 const {Order, Cart} = require('../service/Models');
 const {authAdmin} = require('../service/middlewares');
+const AddSaleItems = require('../service/AddSaleItemsToOrder');
 
 //@desc  get all orders for a user
 //@route /api/orders/:uid
@@ -32,7 +33,7 @@ router.route('/')
     })) /* @desc create order form cart */
     .post(tryCatchWrapper(async (req,res)=>{
         const {cart} = req.body;
-        let newOrder = {
+        let newOrder = AddSaleItems({
             ...cart,
             items: cart.items.map(i=>({
                 ...i,
@@ -41,7 +42,7 @@ router.route('/')
             })),
             isDone:false,
             isPaid:false
-        }
+        });
         newOrder = new Order(newOrder);
         await newOrder.save();
         await Cart.findByIdAndDelete(cart._id);

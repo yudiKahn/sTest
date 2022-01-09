@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { connect } from 'react-redux'
-import {initAdminUsers, deleteUser} from '../redux/actions';
+import {initAdminUsers, deleteUser} from '../../redux/actions';
 import {Link} from 'react-router-dom';
 
 function AdminUsers({users, initAdminUsers, deleteUser}) {

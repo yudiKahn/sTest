@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { connect } from 'react-redux';
-import {Card} from '../components';
-import {initAdminUsers, initAdminOrders} from '../redux/actions';
+import {Card} from '../../components';
+import {initAdminUsers, initAdminOrders} from '../../redux/actions';
 
 function AdminEmail({admin:{users, orders}, initAdminUsers, initAdminOrders}) {
     const ref = useRef(()=>{});

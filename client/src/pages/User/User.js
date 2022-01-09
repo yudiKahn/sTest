@@ -1,8 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import {Card} from '../components';
-import { logout} from '../redux/actions';
-import {getGreeting} from '../utils';
+import {Card} from '../../components';
+import { logout} from '../../redux/actions';
+import {getGreeting} from '../../utils';
 
 function User({user, logout}) {
     return user._id && (<section className="py-20 bg-white dark:bg-gray-800">

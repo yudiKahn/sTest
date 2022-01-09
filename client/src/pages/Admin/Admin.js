@@ -1,7 +1,7 @@
 import React from 'react';
-import {getGreeting} from '../utils';
-import {Card} from '../components';
-import {logout} from '../redux/actions';
+import {getGreeting} from '../../utils';
+import {Card} from '../../components';
+import {logout} from '../../redux/actions';
 import {connect} from 'react-redux'
 
 function Admin({logout}) {

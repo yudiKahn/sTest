@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react';
 import { Provider } from 'react-redux';
 import {BrowserRouter, Switch, Route} from 'react-router-dom';
-import { UserRoute, Navbar, Footer, Spinner, Popup } from './components';
+import { UserRoute, Navbar, Footer, Spinner, Popup, Alerts } from './components';
 import { Login, Landing, Four0Four, Todos, Gallery, User, UserOrders,
      UserOrder, Admin, AdminOrders, AdminUsers, AdminEmail, AdminItems,
-     AdminCategories, Shop, UserCart, ShopItem } from './pages';
+     AdminCategories, Shop, UserCart, ShopItem, Profile } from './pages';
 import { getUserFromToken } from './redux/actions';
 import store from './redux/store';
 
@@ -18,6 +18,7 @@ function App() {
     <BrowserRouter>
       <Spinner/>
       <Popup/>
+      <Alerts/>
       <div className="flex flex-col h-screen">
         <Navbar/>
         <Switch>
@@ -27,6 +28,7 @@ function App() {
             <UserRoute exact path="/user" component={User}/>
             <UserRoute exact path="/user/orders" component={UserOrders}/>
             <UserRoute exact path="/user/cart" component={UserCart}/>
+            <UserRoute exact path="/user/profile" component={Profile}/>
             <UserRoute exact path="/user/orders/:uid" component={UserOrder}/>
             <UserRoute exact path="/admin" component={Admin}/>
             <UserRoute exact path="/admin/users" component={AdminUsers}/>
